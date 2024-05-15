@@ -127,6 +127,12 @@ class Toprow:
                         elem_id=f"{id_part}_interrupt",
                         elem_classes="generate-box-interrupt",
                     )
+                    self.interrupting = gr.Button(
+                        "Interrupting...",
+                        elem_id=f"{id_part}_interrupting",
+                        elem_classes="generate-box-interrupting", 
+                        tooltip="Interrupting generation..."
+                    )
                     self.skip = gr.Button(
                         "Skip",
                         elem_id=f"{id_part}_skip",
@@ -147,7 +153,11 @@ class Toprow:
                         inputs=[],
                         outputs=[],
                     )
-
+                    self.interrupting.click(
+                        fn=lambda: shared.state.interrupt(),
+                        inputs=[],
+                        outputs=[],
+                    )
                 with gr.Row(elem_id=f"{id_part}_tools"):
                     self.paste = ToolButton(value=paste_symbol, elem_id="paste")
 
